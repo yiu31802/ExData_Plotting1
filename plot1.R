@@ -10,6 +10,12 @@ DF <- read.csv.sql(file="household_power_consumption.txt", sep=";",
                     sql = 'select * from file where Date = "1/2/2007" OR \
                            Date = "2/2/2007"')
 
+# Open a graphic device
+png(filename="plot1.png")
+
 ## Plot 'Global Active Power' distribution
 hist(DF[,3], breaks=20, xlab="Global Active Power (kilowatts)",
      xlim=c(0,6), col="red", main="Global Active Power")
+
+# Close the graphic device
+dev.off()

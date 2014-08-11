@@ -10,6 +10,9 @@ DF <- read.csv.sql(file="household_power_consumption.txt", sep=";",
                     sql = 'select * from file where Date = "1/2/2007" OR \
                            Date = "2/2/2007"')
 
+# Open a graphic device
+png(filename="plot3.png")
+
 ## Concatenate Date and Time column, and make a vector named `dates`
 dates <- with(DF, strptime(paste(Date, Time), format="%d/%m/%Y %H:%M:%S"))
 
@@ -21,3 +24,6 @@ lines(x=dates, y=DF[,9], type="l", col="blue")
 ## Next put the legend
 legend("topright", lty=c(1,1,1), col=c("black", "red", "blue"),
        legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"))
+
+# Close the graphic device
+dev.off()

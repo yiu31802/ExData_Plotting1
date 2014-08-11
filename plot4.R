@@ -13,9 +13,12 @@ DF <- read.csv.sql(file="household_power_consumption.txt", sep=";",
 ## Concatenate Date and Time column, and make a vector named `dates`
 dates <- with(DF, strptime(paste(Date, Time), format="%d/%m/%Y %H:%M:%S"))
 
+# Open a graphic device
+png(filename="plot4.png")
+
 ## Prepare a graphic device for 4 plots
 par(mfcol=c(2,2))
-    
+
 ## Plot (1,1)
 plot(x=dates, y=DF[,3], type="l", xlab="",
      ylab="Global Active Power (kilowatts)")
@@ -34,3 +37,6 @@ plot(x=dates, y=DF[,5], type="l", xlab="datetime",
 
 ## Plot (2,2)
 plot(x=dates, y=DF[,4], type="l", xlab="datetime", ylab="Global_reactive_power")
+
+# Close the graphic device
+dev.off()
